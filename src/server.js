@@ -2,7 +2,7 @@ import express, { request, response } from "express";
 import cors from "cors"
 import dotenv from "dotenv";
 import pino from "pino-http";
-import { getContacts, getContactsById } from "./services/contacts-services.js";
+import { getContacts, getContactsById } from "./services/contacts.js";
 
 
 
@@ -31,12 +31,12 @@ const setupServer = () => {
             message: "Successfully found contacts!"
         });
     })
-    app.get("/contacts/:id", async (request, response) => {
+    app.get("/contacts/:contactId", async (request, response) => {
         try {
             
         
-            const { id } = request.params;
-            const data = await getContactsById(id);
+            const { contactId } = request.params;
+            const data = await getContactsById(contactId);
 
             if (!data) {
                 return response.status(404).json({
@@ -45,7 +45,7 @@ const setupServer = () => {
             }
             response.json({
                 status: 200,
-                message: `Successfully found contact with id ${id}!`,
+                message: `Successfully found contact with id ${contactId}!`,
                 data
             });
         } catch (error) {
