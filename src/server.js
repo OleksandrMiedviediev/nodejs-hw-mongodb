@@ -54,7 +54,7 @@ const setupServer = () => {
             }
             const { status = 500 } = error;
             response.status(status).json({
-                message: error.message
+                message: "Contact not found'"
             })
         }
         })
