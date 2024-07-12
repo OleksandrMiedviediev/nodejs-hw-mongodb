@@ -20,10 +20,7 @@ const setupServer = () => {
     app.use(logger)
     app.use(cors());
 
-    app.get("/api", (request, response) => {
-        response.send('<h1>Home page</h1>');
-    })
-    app.get("/api/contacts", (request, response) => {
+    app.get("/contacts", (request, response) => {
         response.json(contacts);
     })
 
