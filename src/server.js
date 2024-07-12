@@ -32,7 +32,7 @@ const setupServer = () => {
             message: "Not Found"
         })
     })
-    app.listen(3000, () => console.log(`Server is running on port ${PORT}`));
+    app.listen(`${PORT}`, () => console.log(`Server is running on port ${PORT}`));
 }
 
 export default setupServer;
