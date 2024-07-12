@@ -6,7 +6,7 @@ import pino from "pino-http";
 
 
 dotenv.config();
-const PORT = Number(process.env.PORT);
+const { PORT } = process.env;
 
 const setupServer = () => {
     const app = express();
@@ -32,7 +32,7 @@ const setupServer = () => {
             message: "Not Found"
         })
     })
-    app.listen(`${PORT}`, () => console.log(`Server is running on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 }
 
 export default setupServer;
