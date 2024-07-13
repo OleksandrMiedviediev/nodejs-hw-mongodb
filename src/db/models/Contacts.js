@@ -21,8 +21,14 @@ const contactShema = new Schema({
         enum: ["work", "home", "personal"],
         require: true,
         default: "personal",
+    },
+    createdAt: {
+        timestamps: true,
     }
-})
+},
+    {
+        timestamps: true
+    })
 
 const Contact = model("contact", contactShema);
 export default Contact;
