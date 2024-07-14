@@ -8,7 +8,7 @@
         "test": "echo\"Error: no test specified\" && exit 1",
         "start": "node src/index.js",
         "start:dev": "nodemon src/index.js",
-        "push":"git add .; git commit -m 'add'; git push"
+        "push": "git add .; git commit -m 'add'; git push"
     },
     "keywords": [],
     "author": "",
@@ -19,6 +19,7 @@
         "eslint": "^9.6.0",
         "express": "^4.19.2",
         "http": "^0.0.1-security",
+        "http-errors": "^2.0.0",
         "init": "^0.1.2",
         "mongoose": "^8.5.0",
         "pino": "^9.2.0",
