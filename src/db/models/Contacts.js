@@ -24,7 +24,8 @@ const contactShema = new Schema({
     }
 },
     {
-        timestamps: true
+        timestamps: true,
+        versionKey: false,
     })
 
 const Contact = model("contact", contactShema);

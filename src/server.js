@@ -22,7 +22,9 @@ const setupServer = () => {
 
     app.use(logger)
     app.use(cors());
-    app.use("/contacts", contactsRouter)
+    app.use(express.json())
+
+    app.use("/contacts", contactsRouter);
     
     app.use(notFaundHandler);
     app.use(errorHandler)
