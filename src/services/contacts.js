@@ -1,29 +1,52 @@
 import Contact from "../db/models/Contacts.js";
+import calcPaginationData from "../utils/calcPaginationData.js";
 
 
 
-export const getContacts = () => Contact.find();
+export const getContacts = async({filter, page, perPage, sortBy = "name", sortOrder = "asc"}) => {
+  const skip = (page - 1) * perPage;
+  const databaseQuery = Contact.find();
+  if (filter.contactType) {
+    databaseQuery.where("contactType").equals(filter.contactType);
+  }
+  if (filter.isFavourite) {
+    databaseQuery.where("isFavourite").equals(filter.isFavourite);
+  }
+
+  const data = await databaseQuery.find().skip(skip).limit(perPage).sort({[sortBy]: sortOrder});
+  const totalItems = await Contact.find().merge(databaseQuery).countDocuments();
+  const {totalPages, hasNextPage, hasPreviousPage} = calcPaginationData({total: totalItems, perPage, page})
+  return {
+    data,
+    page,
+    perPage,
+    totalPages,
+    totalItems,
+    hasPreviousPage,
+    hasNextPage,
+  }
+};
+
 
 export const getContactsById = contactId => Contact.findById(contactId);
 
 export const addContact = data => Contact.create(data);
 
 export const updateContact = async (contactId, payload, options = {}) => {
-  const rawResult = await Contact.findOneAndUpdate(
+  const result = await Contact.findOneAndUpdate(
     { _id: contactId },
     payload,
     {
-      new: true,
       includeResultMetadata: true,
       ...options,
     },
   );
 
-  if (!rawResult || !rawResult.value) return null;
+  if (!result || !result.value) return null;
 
   return {
-    contact: rawResult.value,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+    contact: result.value,
+    isNew: Boolean(result?.lastErrorObject?.upserted),
   };
 };
 
