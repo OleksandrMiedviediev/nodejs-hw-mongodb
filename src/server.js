@@ -6,6 +6,9 @@ import contactsRouter from "./routers/contacts-router.js";
 import notFaundHandler from "./middlewares/notFaundHandler.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
+import authRouter from "./routers/auth-router.js";
+import cookieParser from "cookie-parser";
+
 
 
 dotenv.config();
@@ -20,12 +23,16 @@ const setupServer = () => {
         }
     })
 
-    app.use(logger)
+
+    
+    app.use(logger);
     app.use(cors());
-    app.use(express.json())
+    app.use(cookieParser());
+    app.use(express.json());
 
     app.use("/contacts", contactsRouter);
-    
+    app.use("/auth", authRouter);
+
     app.use(notFaundHandler);
     app.use(errorHandler)
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

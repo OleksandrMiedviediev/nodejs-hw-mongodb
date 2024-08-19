@@ -1,0 +1,12 @@
+import User from "../db/models/User.js";
+import { hashValue } from "../utils/hash.js";
+
+
+export const findUser = filter => User.findOne(filter)
+
+export const register = async (data) => {
+    const { password } = data;
+    const hashPassord = await hashValue(password);
+    return User.create({...data, password: hashPassord});
+
+};
