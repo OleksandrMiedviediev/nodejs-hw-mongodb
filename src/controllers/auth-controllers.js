@@ -34,7 +34,7 @@ export const registerController = async (req, res) => {
     })
 }
 
-export const signinController = async (req, res) => {
+export const loginController = async (req, res) => {
     const { email, password } = req.body;
     const user = await findUser({ email });
     if(!user){

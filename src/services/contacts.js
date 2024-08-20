@@ -53,6 +53,4 @@ export const updateContact = async (contactId, payload, options = {}) => {
   };
 };
 
-export const deleteContact = async (studentId) => {
-    
-}
+export const deleteContact = filter => Contact.findOneAndDelete(filter);
