@@ -37,14 +37,13 @@ export const addContact = data => Contact.create(data);
 
 export const updateContact = async (contactId, payload, options = {}) => {
   const result = await Contact.findOneAndUpdate(
-    { _id: contactId },
+    contactId,
     payload,
     {
       includeResultMetadata: true,
       ...options,
     },
   );
-
   if (!result || !result.value) return null;
 
   return {
