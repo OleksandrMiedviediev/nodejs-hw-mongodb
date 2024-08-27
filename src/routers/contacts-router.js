@@ -20,7 +20,7 @@ contactsRouter.get("/", ctrlWrapper(getAllContactsController));
 contactsRouter.get("/:contactId", isValidId, ctrlWrapper(getContactsByIdController))
 
 contactsRouter.post("/", upload.single("photo"),validateBody(contactAddSchema), ctrlWrapper(addContactController))
-contactsRouter.patch("/:contactId", validateBody(contactUpdateSchema), ctrlWrapper(patchContactController));
+contactsRouter.patch("/:contactId", upload.single("photo"), validateBody(contactUpdateSchema), ctrlWrapper(patchContactController));
 contactsRouter.delete("/:contactId", ctrlWrapper(deleteContactController))
         
 export default contactsRouter;
