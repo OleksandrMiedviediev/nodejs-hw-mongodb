@@ -8,7 +8,10 @@
         "test": "echo\"Error: no test specified\" && exit 1",
         "start": "node src/index.js",
         "start:dev": "nodemon src/index.js",
-        "push": "git add .; git commit -m 'add'; git push"
+        "push": "git add .; git commit -m 'add'; git push",
+        "build": "npm run build-docs",
+        "build-docs": "redocly bundle --ext json -o docs/swagger.json",
+        "preview-docs": "redocly preview-docs"
     },
     "keywords": [],
     "author": "",
@@ -21,6 +24,7 @@
         "dotenv": "^16.4.5",
         "eslint": "^9.6.0",
         "express": "^4.19.2",
+        "google-auth-library": "^9.14.0",
         "handlebars": "^4.7.8",
         "http": "^0.0.1-security",
         "http-errors": "^2.0.0",
@@ -32,9 +36,11 @@
         "nodemailer": "^6.9.14",
         "nodemaster": "^1.0.0",
         "pino": "^9.2.0",
-        "pino-http": "^10.2.0"
+        "pino-http": "^10.2.0",
+        "swagger-ui-express": "^5.0.1"
     },
     "devDependencies": {
+        "@redocly/cli": "^1.22.1",
         "nodemon": "^3.1.4",
         "pino-pretty": "^11.2.1"
     }
