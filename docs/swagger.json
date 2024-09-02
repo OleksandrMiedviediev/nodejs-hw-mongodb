@@ -14,7 +14,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://hw7-swagger-6dum.onrender.com"
+      "url": "https://example.com/api/v1"
     }
   ],
   "tags": [
@@ -209,14 +209,10 @@
                     ],
                     "example": "work"
                   },
-                  "userId": {
-                    "description": "User's id created by contact",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
-                  },
                   "photo": {
                     "description": "Link to contact's photo",
                     "type": "string",
+                    "format": "binary",
                     "example": "https://res.cloudinary.com/diah8te11/image/upload/v1724706812/photos/zhaiqcqtobnifvgceklk.png"
                   }
                 }
@@ -345,6 +341,53 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Contact's name",
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "phoneNumber": {
+                    "description": "Contact's number",
+                    "type": "number",
+                    "example": 380000000011
+                  },
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "null@email.com"
+                  },
+                  "isFavourite": {
+                    "description": "Contact's favourite",
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "contactType": {
+                    "description": "Contact's type",
+                    "type": "string",
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
+                    "example": "work"
+                  },
+                  "photo": {
+                    "description": "Link to contact's photo",
+                    "type": "string",
+                    "format": "binary",
+                    "example": "https://res.cloudinary.com/diah8te11/image/upload/v1724706812/photos/zhaiqcqtobnifvgceklk.png"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Patch contact by id",
